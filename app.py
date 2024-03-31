@@ -26,8 +26,11 @@ class QuestionsExplorer:
 
         return questionResults
 
+google_api_key = st.secrets["google_api_key"]
+google_cse_id = st.secrets["google_cse_id"]
+
 st.title('seocial_buterfly')
-st.write('SEOcial Butterfly is a powerful SEO research tool built with Streamlit. It's designed to optimize websites for search engines by providing comprehensive insights and actionable recommendations. The tool performs keyword analysis, metadata checks, backlink tracking, and usability analysis, all presented in an intuitive, user-friendly interface. With SEOcial Butterfly, enhancing your website's SEO performance becomes a breeze.')
+st.write('SEOcial Butterfly is a powerful SEO research tool built with Streamlit. Designed to optimize websites for search engines by providing comprehensive insights and actionable recommendations. The tool performs keyword analysis, metadata checks, backlink tracking, and usability analysis, all presented in an intuitive, user-friendly interface. With SEOcial Butterfly, enhancing your websites SEO performance becomes a breeze.')
 
 t1, t2, t3 = st.tabs(['Site Analysis', 'Serp Analysis', 'Keyword Coverage'])
 
@@ -51,7 +54,7 @@ with t1:
 
     # You can add functionality here to process the input data when the form is submitted
     if submit_button:
-        output = analyze(site, sitemap)
+        output = analyze(site_url, sitemap_xml)
         df = pd.DataFrame(output['pages'])
 
         st.write('Site URL:', site_url)
@@ -60,7 +63,7 @@ with t1:
 with t2:
     with st.expander('Serp Instructions'):
         st.write('Serp Analysis (Search Engine Results Page reviews the top ranking web pages for a specific search query. SERP analysis helps you understand the competition and identify opportunities to improve your website ranking.)') 
-        st.write('Now you know who is ranked first on Google, but you don't know why.'')
+        st.write('Now you know who is ranked first on Google, but you dont know why.')
         st.write('Enter the search query you want to analyze.')
         st.write('Click the "Analyze" button to start the analysis.')
         st.write('The results will be displayed below.')
@@ -76,7 +79,7 @@ with t2:
     # You can add functionality here to process the input data when the form is submitted
     if submit_button:
         positions = list(range(1, 101, 10))
-        res = adv.serp_goog(key=api_key, cx=cse_id, q=search_query, gl=["us"], start=positions)
+        res = adv.serp_goog(key=google_api_key, cx=google_cse_id, q=search_query, gl=["us"], start=positions)
         res_small = res[["searchTerms","rank","title","snippet","formattedUrl"]].copy()
 
         st.write('Search Query:', search_query)
@@ -91,7 +94,7 @@ with t3:
         submit_button = st.form_submit_button('Generate Keyword List')
     
     # Processing form submission
-    if submit_button and userInput:
+    if submit_button:
         # Create an object of the QuestionsExplorer Class
         qObj = QuestionsExplorer()
         
