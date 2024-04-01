@@ -47,7 +47,7 @@ with t1:
         site_url = st.text_input('Site URL', help='Enter the URL of the site you want to analyze.')
 
         # Text area for the sitemap XML content
-        sitemap_xml = st.text_ipnut('Sitemap (XML)', help='Enter the link of the XML sitemap here.')
+        sitemap_xml = st.text_input('Sitemap (XML)', help='Enter the link of the XML sitemap here.')
 
         # Form submit button
         submit_button = st.form_submit_button('Analyze')
