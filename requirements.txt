@@ -3,4 +3,4 @@ pandas==2.2.1
 Requests==2.31.0
 seoanalyzer==0.0.1
 streamlit==1.32.2
-pyseoanalyzer==0.0.1
+pyseoanalyzer
